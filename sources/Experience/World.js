@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
+import TvScreen from './tvScreen.js'
+import PcScreenHorizontal from './PcScreenHorizontal.js'
 
 export default class World
 {
@@ -22,62 +24,42 @@ export default class World
             if(_group.name === 'base')
             {
                 this.setRoom()
+                this.setTvScreens()
+                this.setPcScreenHorizontal()
             }
         })
     }
 
-    // setDummy()
-    // {
-    //     this.resources.items.lennaTexture.encoding = THREE.sRGBEncoding
-        
-    //     const cube = new THREE.Mesh(
-    //         new THREE.BoxGeometry(1, 1, 1),
-    //         new THREE.MeshBasicMaterial({ map: this.resources.items.lennaTexture })
-    //     )
-    //     this.scene.add(cube)        
-    // }
-
     setRoom() {
         this.room = {}
         this.room.model = this.resources.items.roomModel.scene
+
+        this.room.texture = this.resources.items.bakedTexture
+        this.room.texture.encoding = THREE.sRGBEncoding
+        this.room.texture.flipY = false
+
+        this.room.material = new THREE.MeshBasicMaterial({ map: this.room.texture})
+
+        this.room.model.traverse((_child) => {
+            if(_child instanceof THREE.Mesh) {
+                _child.material = this.room.material
+            }
+        })
 
         this.scene.add(this.room.model)
 
         const directionLightOne = new THREE.DirectionalLight('#243299')
         directionLightOne.position.set(-3, 1.30, 1.30)
         this.scene.add(directionLightOne)
-        console.log(directionLightOne)
+    }
 
-        if(this.debug) {
-            const PARAMS = {
-                x: -3,
-                y: 1.30,
-                z: 1.30,
-                color: '#243299',
-                intensity: 3
-              };
-            this.debugFolder.addInput(PARAMS, 'color')
-            this.debugFolder.addInput(PARAMS, 'x', {
-                    min: -20,
-                    max: 20
-                })
-            this.debugFolder.addInput(PARAMS, 'y', {
-                min: -20,
-                max: 20
-            })
-            this.debugFolder.addInput(PARAMS, 'z', {
-                min: -20,
-                max: 20
-            })
-            this.debugFolder.addInput(PARAMS, 'intensity', {
-                min: -20,
-                max: 20
-            })
-            this.debugFolder.on('change', () => {
-                    directionLightOne.color.set(PARAMS.color)
-                    directionLightOne.position.set(PARAMS.x, PARAMS.y, PARAMS.z)
-                })
-        }
+    setTvScreens()
+    {
+        this.tvScreen = new TvScreen()
+    }
+
+    setPcScreenHorizontal() {
+        this.pcScreenHorizontal = new PcScreenHorizontal()
     }
 
     resize()

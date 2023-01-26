@@ -11,8 +11,6 @@ import Renderer from './Renderer.js'
 import Camera from './Camera.js'
 import World from './World.js'
 
-console.log(Pane)
-
 import assets from './assets.js'
 
 export default class Experience
@@ -75,8 +73,8 @@ export default class Experience
     {
         if(this.config.debug)
         {
-            // this.debug = new GUI()
-            this.debug = new Pane()
+            this.debug = new GUI()
+            // this.debug = new Pane()
         }
     }
 
