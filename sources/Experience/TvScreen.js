@@ -27,9 +27,7 @@ export default class TvScreen {
         this.model.element.style.zIndex = 1
         
         // Texture
-        // this.model.texture = new THREE.TextureLoader().load('../assets/smartTv.jpg')
         this.model.texture = new THREE.TextureLoader().load(this.model.element.src)
-        // this.model.texture = new THREE.Texture('../assets/smartTv.jpg')
         this.model.texture.encoding = THREE.sRGBEncoding
 
         // Material

@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from './Experience.js'
 import TvScreen from './tvScreen.js'
 import PcScreenHorizontal from './PcScreenHorizontal.js'
+import MacScreen from './MacScreen.js'
 
 export default class World
 {
@@ -26,6 +27,7 @@ export default class World
                 this.setRoom()
                 this.setTvScreens()
                 this.setPcScreenHorizontal()
+                this.macScreen()
             }
         })
     }
@@ -60,6 +62,10 @@ export default class World
 
     setPcScreenHorizontal() {
         this.pcScreenHorizontal = new PcScreenHorizontal()
+    }
+
+    macScreen() {
+        this.macScreen = new MacScreen()
     }
 
     resize()

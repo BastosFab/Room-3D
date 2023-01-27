@@ -11,6 +11,8 @@ export default [
             { name: 'smartTv', source: '/assets/smartTv.png', type: 'texture'},
 
             { name: 'pcScreenHorizontal', source: '/assets/static/PcScreenHorizontal.glb', type: 'model'},
+
+            { name: 'macScreenModel', source: '/assets/static/macScreen.glb', type: 'model'},
             // { name: 'codVideo', source: '/assets/codVideo.mp4', type: 'texture'}
         ]
     }
